@@ -38,14 +38,11 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     var messagesList = mutableListOf<Message>()
 
-    val API_ENGLISH = "https://61b337cdaf5ff70017ca1d4b.mockapi.io/pdp/ai/db/EnglishDB"
-    val API_UZBEK = "https://61b337cdaf5ff70017ca1d4b.mockapi.io/pdp/ai/db/UzbekDB"
+    var englishDB = SplashScreen().englishDB
+    var uzbekDB = SplashScreen().uzbekDB
 
     private lateinit var adapter: MessagingAdapter
     private val botList = listOf("Maya", "Farida", "Mohichehra", "Nargiza")
-
-    private lateinit var uzbekDB: JSONArray
-    private lateinit var englishDB: JSONArray
 
     var language = "Uzbek"
 
@@ -60,9 +57,6 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         myLifeCycle = MyLifeCycle(this, lifecycle)
         lifecycle.addObserver(myLifeCycle)
 
-        connectUzbekAPI()
-        connectEnglishAPI()
-
         flagBtn.setOnClickListener {
             if (language == "Uzbek") {
                 flagBtn.setImageResource(R.drawable.usa)
@@ -70,7 +64,7 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                 if (et_message.text.isNotEmpty()) {
                     btnVoice.visibility = View.GONE
                     btnSend.visibility = View.VISIBLE
-                }  else {
+                } else {
                     btnVoice.visibility = View.VISIBLE
                     btnSend.visibility = View.GONE
                 }
@@ -104,50 +98,13 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                 if (et_message.text.isNotEmpty()) {
                     btnVoice.visibility = View.GONE
                     btnSend.visibility = View.VISIBLE
-                }  else {
+                } else {
                     btnVoice.visibility = View.VISIBLE
                     btnSend.visibility = View.GONE
                 }
             }
         }
     }
-
-    private fun connectEnglishAPI() {
-        val jsonArrayENGLISH = JSONArray()
-        val queueENGLISH = Volley.newRequestQueue(this)
-        val jsonObjectRequest = JsonArrayRequest (
-            Request.Method.GET, API_ENGLISH, jsonArrayENGLISH, {
-                setEnglish(it)
-            }, {
-                Toast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG).show()
-            }
-        )
-        queueENGLISH.add(jsonObjectRequest)
-    }
-    private fun setEnglish(jsonArray: JSONArray) {
-        englishDB = jsonArray
-    }
-
-
-
-    private fun connectUzbekAPI() {
-        val jsonArrayUZBEK = JSONArray()
-        val queueUZBEK = Volley.newRequestQueue(this)
-        val jsonArrayRequest = JsonArrayRequest (
-            Request.Method.GET, API_UZBEK, jsonArrayUZBEK, {
-                setUzbek(it)
-            }, {
-                Toast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG).show()
-            }
-        )
-        queueUZBEK.add(jsonArrayRequest)
-    }
-    private fun setUzbek(jsonArray: JSONArray) {
-        uzbekDB = jsonArray
-    }
-
-
-
 
     private fun clickEvents() {
         btnSend.setOnClickListener {
@@ -203,9 +160,9 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             withContext(Dispatchers.Main) {
 
                 val response = if (language == "Uzbek") {
-                    BotResponse.basicResponses(message, uzbekDB, language)
+                    BotResponse.basicResponses(message, uzbekDB!!, language)
                 } else {
-                    BotResponse.basicResponses(message, englishDB, language)
+                    BotResponse.basicResponses(message, englishDB!!, language)
                 }
 
                 messagesList.add(Message(response, Constants.RECEIVE_ID))
