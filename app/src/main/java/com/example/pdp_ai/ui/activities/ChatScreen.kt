@@ -52,12 +52,11 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+
         textToSpeech = TextToSpeech(this, this)
         recyclerView()
         clickEvents()
-
         changeLanguage("uz")
-
         myLifeCycle = MyLifeCycle(this, lifecycle)
         lifecycle.addObserver(myLifeCycle)
 
