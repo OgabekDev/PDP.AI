@@ -9,6 +9,7 @@
     android:gravity="center"
     tools:context=".ui.activities.SplashScreen">
 
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -24,8 +25,6 @@
         android:layout_width="180dp"
         android:layout_height="130dp"
         android:src="@drawable/pdpsp"/>
-
-
 </LinearLayout>
 
 
