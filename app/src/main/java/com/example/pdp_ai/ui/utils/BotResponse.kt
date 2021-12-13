@@ -1,6 +1,5 @@
 package com.example.pdp_ai.ui.utils
 
-import com.example.pdp_ai.ui.ChatScreen
 import org.json.JSONArray
 
 object BotResponse {

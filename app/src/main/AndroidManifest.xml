@@ -13,11 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PDP_AI">
         <activity
-            android:name=".ui.ChatScreen"
+            android:name=".ui.activities.ChatScreen"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.SplashScreen"
+            android:name=".ui.activities.SplashScreen"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"
             android:launchMode="singleInstance"

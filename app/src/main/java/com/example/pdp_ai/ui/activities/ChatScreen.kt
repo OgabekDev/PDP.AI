@@ -1,4 +1,4 @@
-package com.example.pdp_ai.ui
+package com.example.pdp_ai.ui.activities
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -59,11 +59,10 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         changeLanguage("uz")
 
         myLifeCycle = MyLifeCycle(this, lifecycle)
+        lifecycle.addObserver(myLifeCycle)
 
         connectUzbekAPI()
         connectEnglishAPI()
-
-        lifecycle.addObserver(myLifeCycle)
 
         flagBtn.setOnClickListener {
             if (language == "Uzbek") {

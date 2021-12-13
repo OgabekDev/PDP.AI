@@ -1,4 +1,4 @@
-package com.example.pdp_ai.ui
+package com.example.pdp_ai.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

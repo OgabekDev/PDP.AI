@@ -1,6 +1,5 @@
-package com.example.pdp_ai.ui
+package com.example.pdp_ai.ui.activities
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
