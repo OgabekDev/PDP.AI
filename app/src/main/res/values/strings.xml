@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">PDP AI</string>
+    <string name="enter_text">Enter a Message</string>
+    <string name="pdptext">PDP AI     </string>
+    <string name="pdpai">PDP AI</string>
+    <string name="online">online   </string>
+    <string name="type">typing...   </string>
+    <string name="pdpl">PDP Location</string>
+    <string name="off">Official Website</string>
+    <string name="clear">Clear Chat</string>
+    <string name="info">PDP Info</string>
+    <string name="open">YouTube</string>
+
+    <string name="first_sms1">Hi, You are contacting to PDP AI! My name is</string>
+    <string name="first_sms2">, I am your consultant. How can I help you ? ☺️</string>
+
+    <string name="error">Something went Wrong</string>
+
+    <string name="speak"> Say something...</string>
+    <string name="error_speak">Speech not supported...</string>
+
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PDP AI</string>
+    <string name="enter_text">Habar kiriting</string>
+    <string name="pdptext">PDP AI     </string>
+    <string name="pdpai">PDP AI</string>
+    <string name="online">online   </string>
+    <string name="type">yozmoqda...   </string>
+    <string name="pdpl">PDP Manzili</string>
+    <string name="off">Rasmiy Website</string>
+    <string name="clear">Tarixni Tozalash</string>
+    <string name="info">PDP Haqida</string>
+    <string name="open">YouTube</string>
+
+    <string name="first_sms1">Assalomu alaykum, Siz PDP akademiyasiga murojaat qildingiz! Ismim</string>
+    <string name="first_sms2">, Sizning shaxsiy konsultantingizman. Sizga qanday yordam bera olaman ? ☺️</string>
+
+    <string name="error">Xatolik sodir bo\'ldi</string>
+
+    <string name="speak">Gapiring...</string>
+    <string name="error_speak">Til ni qo\'llab quvatlamaydi...</string>
+
+</resources>
