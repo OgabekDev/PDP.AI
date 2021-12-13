@@ -126,13 +126,7 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         queueENGLISH.add(jsonObjectRequest)
     }
     private fun setEnglish(jsonArray: JSONArray) {
-        if (jsonArray.length() != 0 || jsonArray.isNull(0)) {
-            englishDB = jsonArray
-            et_message.isEnabled = true
-        } else {
-            connectEnglishAPI()
-            et_message.isEnabled = false
-        }
+        englishDB = jsonArray
     }
 
 
@@ -150,13 +144,7 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         queueUZBEK.add(jsonArrayRequest)
     }
     private fun setUzbek(jsonArray: JSONArray) {
-        if (jsonArray.length() != 0 || jsonArray.isNull(0)) {
-            uzbekDB = jsonArray
-            et_message.isEnabled = true
-        } else {
-            connectEnglishAPI()
-            et_message.isEnabled = false
-        }
+        uzbekDB = jsonArray
     }
 
 
