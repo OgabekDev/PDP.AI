@@ -8,7 +8,9 @@ import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
@@ -18,12 +20,6 @@ import kotlinx.android.synthetic.main.activity_splash_screen.*
 import org.json.JSONArray
 
 class SplashScreen : AppCompatActivity() {
-
-    val API_ENGLISH = "https://61b337cdaf5ff70017ca1d4b.mockapi.io/pdp/ai/db/EnglishDB"
-    val API_UZBEK = "https://61b337cdaf5ff70017ca1d4b.mockapi.io/pdp/ai/db/UzbekDB"
-
-    var uzbekDB: JSONArray? = null
-    var englishDB: JSONArray? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,64 +56,6 @@ class SplashScreen : AppCompatActivity() {
         val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
         return activeNetwork?.isConnectedOrConnecting == true
-    }
-
-    private fun connectUzbekAPI() {
-        val jsonArrayUZBEK = JSONArray()
-        val queueUZBEK = Volley.newRequestQueue(this)
-        val jsonArrayRequest = JsonArrayRequest (
-            Request.Method.GET, API_UZBEK, jsonArrayUZBEK, {
-                 forUzbek(it)
-            }, {
-                val alertDialog = AlertDialog.Builder(this).create()
-                alertDialog.setTitle("Server Connection Error")
-                alertDialog.setMessage("Server bilan aloqa yo'q. Iltimos internetni tekshiring va dasturni qayta ishga tushuring")
-                alertDialog.setButton(
-                    AlertDialog.BUTTON_POSITIVE,
-                    "OK"
-                ) { _: DialogInterface, _: Int ->
-                    finish()
-                }
-                alertDialog.setOnDismissListener{
-                    finish()
-                }
-                alertDialog.show()
-            }
-        )
-        queueUZBEK.add(jsonArrayRequest)
-    }
-
-    private fun forUzbek(DB: JSONArray) {
-        uzbekDB = DB
-    }
-
-    private fun connectEnglishAPI() {
-        val jsonArrayENGLISH = JSONArray()
-        val queueENGLISH = Volley.newRequestQueue(this)
-        val jsonArrayRequest = JsonArrayRequest (
-            Request.Method.GET, API_ENGLISH, jsonArrayENGLISH, {
-                forEnglish(it)
-            }, {
-                val alertDialog = AlertDialog.Builder(this).create()
-                alertDialog.setTitle("Server Connection Error")
-                alertDialog.setMessage("Server bilan aloqa yo'q. Iltimos internetni tekshiring va dasturni qayta ishga tushuring")
-                alertDialog.setButton(
-                    AlertDialog.BUTTON_POSITIVE,
-                    "OK"
-                ) { _: DialogInterface, _: Int ->
-                    finish()
-                }
-                alertDialog.setOnDismissListener{
-                    finish()
-                }
-                alertDialog.show()
-            }
-        )
-        queueENGLISH.add(jsonArrayRequest)
-    }
-
-    private fun forEnglish(DB: JSONArray) {
-        englishDB = DB
     }
 
 }

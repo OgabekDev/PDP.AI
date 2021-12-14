@@ -1,6 +1,7 @@
 package com.example.pdp_ai.ui.activities
 
 import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -38,8 +40,13 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     var messagesList = mutableListOf<Message>()
 
-    var englishDB = SplashScreen().englishDB
-    var uzbekDB = SplashScreen().uzbekDB
+    val API_ENGLISH = "https://61b337cdaf5ff70017ca1d4b.mockapi.io/pdp/ai/db/EnglishDB"
+    val API_UZBEK = "https://61b337cdaf5ff70017ca1d4b.mockapi.io/pdp/ai/db/UzbekDB"
+
+    lateinit var uzbekDB: JSONArray
+    lateinit var englishDB: JSONArray
+
+    var isSpoken = false
 
     private lateinit var adapter: MessagingAdapter
     private val botList = listOf("Maya", "Farida", "Mohichehra", "Nargiza")
@@ -56,6 +63,9 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         changeLanguage("uz")
         myLifeCycle = MyLifeCycle(this, lifecycle)
         lifecycle.addObserver(myLifeCycle)
+
+        connectEnglishAPI()
+        connectUzbekAPI()
 
         flagBtn.setOnClickListener {
             if (language == "Uzbek") {
@@ -103,6 +113,96 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                     btnSend.visibility = View.GONE
                 }
             }
+        }
+    }
+
+    private fun connectUzbekAPI() {
+        val jsonArrayUZBEK = JSONArray()
+        val queueUZBEK = Volley.newRequestQueue(this)
+        val jsonArrayRequest = JsonArrayRequest (
+            Request.Method.GET, API_UZBEK, jsonArrayUZBEK, {
+                forUzbek(it)
+            }, {
+                val alertDialog = AlertDialog.Builder(this).create()
+                alertDialog.setTitle("Server Connection Error")
+                alertDialog.setMessage("Server bilan aloqa yo'q. Iltimos internetni tekshiring va dasturni qayta ishga tushuring")
+                alertDialog.setButton(
+                    AlertDialog.BUTTON_POSITIVE,
+                    "OK"
+                ) { _: DialogInterface, _: Int ->
+                    finish()
+                }
+                alertDialog.setOnDismissListener{
+                    finish()
+                }
+                alertDialog.show()
+            }
+        )
+        queueUZBEK.add(jsonArrayRequest)
+    }
+
+    private fun forUzbek(DB: JSONArray) {
+        if (DB == null) {
+            val alertDialog = AlertDialog.Builder(this).create()
+            alertDialog.setTitle("Server Connection Error")
+            alertDialog.setMessage("Server bilan aloqa yo'q. Iltimos internetni tekshiring va dasturni qayta ishga tushuring")
+            alertDialog.setButton(
+                AlertDialog.BUTTON_POSITIVE,
+                "OK"
+            ) { _: DialogInterface, _: Int ->
+                finish()
+            }
+            alertDialog.setOnDismissListener{
+                finish()
+            }
+            alertDialog.show()
+        } else {
+            uzbekDB = DB
+        }
+    }
+
+    private fun connectEnglishAPI() {
+        val jsonArrayENGLISH = JSONArray()
+        val queueENGLISH = Volley.newRequestQueue(this)
+        val jsonArrayRequest = JsonArrayRequest (
+            Request.Method.GET, API_ENGLISH, jsonArrayENGLISH, {
+                forEnglish(it)
+            }, {
+                val alertDialog = AlertDialog.Builder(this).create()
+                alertDialog.setTitle("Server Connection Error")
+                alertDialog.setMessage("Server bilan aloqa yo'q. Iltimos internetni tekshiring va dasturni qayta ishga tushuring")
+                alertDialog.setButton(
+                    AlertDialog.BUTTON_POSITIVE,
+                    "OK"
+                ) { _: DialogInterface, _: Int ->
+                    finish()
+                }
+                alertDialog.setOnDismissListener{
+                    finish()
+                }
+                alertDialog.show()
+            }
+        )
+        queueENGLISH.add(jsonArrayRequest)
+    }
+
+    private fun forEnglish(DB: JSONArray) {
+        if (DB == null) {
+            val alertDialog = AlertDialog.Builder(this).create()
+            alertDialog.setTitle("Server Connection Error")
+            alertDialog.setMessage("Server bilan aloqa yo'q. IlAtimos internetni tekshiring va dasturni qayta ishga tushuring")
+            alertDialog.setButton(
+                AlertDialog.BUTTON_POSITIVE,
+                "OK"
+            ) { _: DialogInterface, _: Int ->
+                finish()
+            }
+            alertDialog.setOnDismissListener{
+                finish()
+            }
+            alertDialog.show()
+        } else {
+            englishDB = DB
         }
     }
 
@@ -160,8 +260,10 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             withContext(Dispatchers.Main) {
 
                 val response = if (language == "Uzbek") {
+                    Log.e("DataBase", uzbekDB.toString())
                     BotResponse.basicResponses(message, uzbekDB!!, language)
                 } else {
+                    Log.e("DataBase", englishDB.toString())
                     BotResponse.basicResponses(message, englishDB!!, language)
                 }
 
@@ -171,7 +273,12 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
                 recycleView.scrollToPosition(adapter.itemCount - 1)
                 online.text = getText(R.string.online)
-                textToSpeechFun(response)
+
+                if (isSpoken) {
+                    textToSpeechFun(response)
+                    isSpoken = false
+                }
+
                 when (response) {
                     Constants.OPEN_PDP -> {
                         val site = Intent(Intent.ACTION_VIEW)
@@ -186,6 +293,7 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
         }
     }
+
     private fun customBotMessage(message: String) {
         GlobalScope.launch {
             delay(1400)
@@ -247,6 +355,7 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun speechFun() {
+        isSpoken = true
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         intent.putExtra(
             RecognizerIntent.EXTRA_LANGUAGE_MODEL,
