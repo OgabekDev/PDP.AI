@@ -1,5 +1,6 @@
 package com.example.pdp_ai.ui.activities
 
+import android.speech.tts.TextToSpeech
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,13 @@ class MessagingAdapter: RecyclerView.Adapter<MessagingAdapter.MessageViewHolder>
 
     var messagesList = mutableListOf<Message>()
 
-    inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.setOnClickListener {
+
+            }
+        }
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {

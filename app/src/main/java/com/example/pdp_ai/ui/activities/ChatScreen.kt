@@ -68,6 +68,7 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         connectUzbekAPI()
 
         flagBtn.setOnClickListener {
+            textToSpeechFun("")
             if (language == "Uzbek") {
                 flagBtn.setImageResource(R.drawable.usa)
                 language = "English"
@@ -101,6 +102,7 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             btnVoice.visibility = View.VISIBLE
         }
         et_message.addTextChangedListener {
+            textToSpeechFun("")
             if (language == "Uzbek") {
                 btnVoice.visibility = View.GONE
                 btnSend.visibility = View.VISIBLE
@@ -113,6 +115,10 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                     btnSend.visibility = View.GONE
                 }
             }
+        }
+
+        recycleView.setOnClickListener {
+            textToSpeechFun("")
         }
     }
 
@@ -208,6 +214,7 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun clickEvents() {
         btnSend.setOnClickListener {
+            isSpoken = false
             sendMessage()
         }
         et_message.setOnClickListener {
@@ -281,13 +288,49 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
                 when (response) {
                     Constants.OPEN_PDP -> {
+                        delay(2000)
                         val site = Intent(Intent.ACTION_VIEW)
                         site.data = Uri.parse("https://www.pdp.uz/")
                         startActivity(site)
                     }
                     Constants.EXIT -> {
-                        delay(1700)
+                        delay(4000)
                         finish()
+                    }
+                    Constants.CALL -> {
+                        delay(2000)
+                        val call = Intent(Intent.ACTION_DIAL, Uri.parse("tel:+998787774747"))
+                        startActivity(call)
+                    }
+                    Constants.TELEGRAM -> {
+                        delay(2000)
+                        val site = Intent(Intent.ACTION_VIEW)
+                        site.data = Uri.parse("https://www.telegram.me/pdpuz")
+                        startActivity(site)
+                    }
+                    Constants.INSTAGRAM -> {
+                        delay(2000)
+                        val site = Intent(Intent.ACTION_VIEW)
+                        site.data = Uri.parse("https://www.instagram.com/pdpuz")
+                        startActivity(site)
+                    }
+                    Constants.FACEBOOK -> {
+                        delay(2000)
+                        val site = Intent(Intent.ACTION_VIEW)
+                        site.data = Uri.parse("https://www.facebook.com/pdpuz")
+                        startActivity(site)
+                    }
+                    Constants.YOUTUBE -> {
+                        delay(2000)
+                        val site = Intent(Intent.ACTION_VIEW)
+                        site.data = Uri.parse("https://www.youtube.com/c/pdpuz")
+                        startActivity(site)
+                    }
+                    Constants.TIKTOK -> {
+                        delay(2000)
+                        val site = Intent(Intent.ACTION_VIEW)
+                        site.data = Uri.parse("https://www.tiktok.com/@pdpuz")
+                        startActivity(site)
                     }
                 }
             }
@@ -351,6 +394,7 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     fun voice(view: View) {
+        textToSpeechFun("")
         speechFun()
     }
 
@@ -400,8 +444,7 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun textToSpeechFun(str: String) {
-        val strText = str
-        textToSpeech.speak(strText, TextToSpeech.QUEUE_FLUSH, null)
+        textToSpeech.speak(str, TextToSpeech.QUEUE_FLUSH, null)
     }
 
     override fun onDestroy() {
