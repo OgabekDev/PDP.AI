@@ -22,8 +22,8 @@ object BotResponse {
         }
 
         return when (language) {
-            "English" -> "Something went Wrong. Please, contact the +998 78 777 47 47 number or restart the App"
-            "Uzbek" -> "Xatolik sodir bo'ldi. Iltimos +998 78 777 47 47 raqamiga qo'ngiroq qiling yoki dasturni qayta ishga tushiring"
+            "English" -> "Please, contact the +998 78 777 47 47 number to get more information"
+            "Uzbek" -> "Ko'proq ma'lumot olish uchun, iltimos +998 78 777 47 47 raqamiga qo'ngiroq qiling"
             else -> "Error in Language / Tilda xatolik"
         }
 

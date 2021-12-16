@@ -19,5 +19,7 @@
 
     <string name="speak">Gapiring...</string>
     <string name="error_speak">Til ni qo\'llab quvatlamaydi...</string>
+    <string name="telegram">Telegram</string>
+    <string name="instagram">Instagram</string>
 
 </resources>

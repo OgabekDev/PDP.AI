@@ -18,5 +18,7 @@
 
     <string name="speak"> Say something...</string>
     <string name="error_speak">Speech not supported...</string>
+    <string name="telegram">Telegram</string>
+    <string name="instagram">Instagram</string>
 
 </resources>

@@ -361,7 +361,11 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             startActivity(intentChooser)
             dialog.dismiss()
         }
-        dialogView.findViewById<TextView>(R.id.clear).setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.telegram).setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://t.me/pdpuz")
+            val intentChooser = Intent.createChooser(intent, "Launch Telegram")
+            startActivity(intentChooser)
             dialog.dismiss()
         }
         dialogView.findViewById<TextView>(R.id.official).setOnClickListener {
@@ -371,10 +375,10 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             startActivity(intentChooser)
             dialog.dismiss()
         }
-        dialogView.findViewById<TextView>(R.id.info).setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.instagram).setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = (Uri.parse("https://t.me/pdpuz"))
-            val intentChooser = Intent.createChooser(intent, "Launch Telegram")
+            intent.data = (Uri.parse("https:/instagram.com/pdpuz"))
+            val intentChooser = Intent.createChooser(intent, "Launch Instagram")
             startActivity(intentChooser)
             dialog.dismiss()
         }
@@ -389,6 +393,7 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     fun call(view: View) {
+        textToSpeechFun("")
         val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:+998787774747"))
         startActivity(intent)
     }
@@ -405,8 +410,8 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             RecognizerIntent.EXTRA_LANGUAGE_MODEL,
             RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
         )
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speak))
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en")
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.app_name))
         try {
             startActivityForResult(intent, REQ_CODE)
         } catch (exp: ActivityNotFoundException) {

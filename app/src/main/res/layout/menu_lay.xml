@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
-    app:cardCornerRadius="12dp"
+    android:layout_margin="20dp"
     app:cardElevation="12dp"
     android:background="@drawable/edit_round"
     android:layout_height="wrap_content">
@@ -12,6 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:background="#E2E2E2"
             android:orientation="vertical">
 
             <TextView
@@ -19,49 +20,78 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:padding="5dp"
                 android:fontFamily="@font/abeezee"
                 android:text="@string/pdpl"
-                android:textColor="@color/black"
+                android:textColor="@color/green"
                 android:textSize="@dimen/textLay" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="50dp"
+                android:background="#3C000000"/>
 
             <TextView
                 android:id="@+id/official"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:padding="5dp"
                 android:fontFamily="@font/abeezee"
                 android:text="@string/off"
-                android:textColor="@color/black"
+                android:textColor="@color/green"
                 android:textSize="@dimen/textLay" />
 
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="50dp"
+                android:background="#3C000000"/>
+
             <TextView
-                android:id="@+id/clear"
+                android:id="@+id/telegram"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:padding="5dp"
                 android:fontFamily="@font/abeezee"
-                android:text="@string/clear"
-                android:textColor="@color/black"
+                android:text="@string/telegram"
+                android:textColor="@color/green"
                 android:textSize="@dimen/textLay" />
 
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="50dp"
+                android:background="#3C000000"/>
+
             <TextView
-                android:id="@+id/info"
+                android:id="@+id/instagram"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:padding="5dp"
                 android:fontFamily="@font/abeezee"
-                android:text="@string/info"
-                android:textColor="@color/black"
+                android:text="@string/instagram"
+                android:textColor="@color/green"
                 android:textSize="@dimen/textLay" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="50dp"
+                android:background="#3C000000"/>
 
             <TextView
                 android:id="@+id/openYou"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:padding="5dp"
                 android:fontFamily="@font/abeezee"
                 android:text="@string/open"
-                android:textColor="@color/black"
+                android:textColor="@color/green"
                 android:textSize="@dimen/textLay" />
 
         </LinearLayout>

@@ -1,6 +1,5 @@
 package com.example.pdp_ai.ui.activities
 
-import android.speech.tts.TextToSpeech
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,7 @@ class MessagingAdapter: RecyclerView.Adapter<MessagingAdapter.MessageViewHolder>
     inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener {
-
+                val text: String = messagesList[adapterPosition].toString()
             }
         }
     }
@@ -60,4 +59,5 @@ class MessagingAdapter: RecyclerView.Adapter<MessagingAdapter.MessageViewHolder>
         this.messagesList.add(message)
         notifyItemInserted(messagesList.size)
     }
+
 }
