@@ -49,7 +49,7 @@ class ChatScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     var isSpoken = false
 
     private lateinit var adapter: MessagingAdapter
-    private val botList = listOf("Maya", "Farida", "Mohichehra", "Nargiza")
+    private val botList = listOf("Farida", "Mohichehra", "Nargiza")
 
     var language = "Uzbek"
 
